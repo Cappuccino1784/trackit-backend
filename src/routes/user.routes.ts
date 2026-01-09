@@ -1,6 +1,11 @@
 import Router from 'express'
-import { getAllUsers, deleteUser, getUserById, updateUser } from '../controllers/user.controllers'
+import { getAllUsers, deleteUser, getUserById, updateUser, getCurrentUser } from '../controllers/user.controllers'
+import { authMiddleware } from '../middlewares/auth.middleware'
+
 const userRouter = Router()
+
+// Get Current User (authenticated)
+userRouter.get('/me', authMiddleware, getCurrentUser)
 
 // Get All Users
 userRouter.get('/get-users', getAllUsers)

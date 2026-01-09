@@ -1,6 +1,25 @@
 import { Request, Response } from "express";
 import User from '../models/User'
 
+export const getCurrentUser = async ( req: Request, res: Response) => {
+    try {
+        const userId = req.userId; // From auth middleware
+        
+        if (!userId) {
+            return res.status(401).json({ message: 'User not authenticated' });
+        }
+        
+        const user = await User.findById(userId).select('-password');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
 export const getAllUsers = async ( req: Request, res: Response) => {
     const users = await User.find()
     res.send(users)
