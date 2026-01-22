@@ -50,17 +50,17 @@ docker run -d -p 27017:27017 --name mongodb mongo:latest
 
 ### Development Mode (with hot reload)
 ```bash
-npm run dev
+yarn dev
 ```
 
 ### Build for Production
 ```bash
-npm run build
+yarn build
 ```
 
 ### Production Mode
 ```bash
-npm start
+yarn start
 ```
 
 The server will run on `http://localhost:5000`
